@@ -15,13 +15,14 @@ app.use(bodyParser.urlencoded({extended: false}))
 // parse application/json
 app.use(bodyParser.json())
 
-var day=""
-var month=""
-var year=""
+var day=0
+var month=0
+var year=0
 var origin=""
 var destination=""
-var passengerNumber=""
-var firstmessage=0;
+var passengerNumber=0
+var firstmessage=0
+var flightAPI="co489413118494692021956798574785"
 
 
 
@@ -73,43 +74,52 @@ function receivedMessage(event) {
         if(messageText==="#reset") {
             origin=""
             destination=""
-            day=""
-            year=""
-            month=""
-            passengerNumber=""
+            day=0
+            year=0
+            month="0
+            passengerNumber=0
             firstmessage=0
             sendTextMessage(senderID,"Inputs are reset.")
         }
         else
         {
-            if(day==="" && month==="" && year ===""&&origin ===""&& destination===""&&passengerNumber===""&&firstmessage===0)
+            if(day===0 && month===0 && year ===0&&origin ===""&& destination===""&&passengerNumber===0&&firstmessage===0)
             {
                 sendTextMessage(senderID,"Hi,Please enter the destination")
                 firstmessage=1
             }
-            else if (day==="" && month==="" && year ===""&&origin ===""&& destination===""&&passengerNumber===""){
+            else if (day===0 && month===0&& year ===0&&origin ===""&& destination===""&&passengerNumber===0){
                 destination=messageText
                 sendTextMessage(senderID,"Ok.Please enter the origin")
             }
-            else if (day==="" && month==="" && year ===""&&origin ===""&&passengerNumber===""){
+            else if (day===0 && month===0&& year ===0&&origin ===""&&passengerNumber===0){
                 origin=messageText
                 sendTextMessage(senderID,"Ok.Please enter the year")
             }
-            else if (day==="" && month==="" && year ===""&&passengerNumber===""){
-                year=messageText
-                sendTextMessage(senderID,"Ok.Please enter the month")
+            else if (day===0 && month===0 && year ===0&&passengerNumber===0){
+                year=parseInt(messageText)
+                if(year>=2017 )
+                    sendTextMessage(senderID,"Ok.Please enter the month")
+                else
+                    sendTextMessage(senderID,"Invalid year.Please enter year again")
             }
-            else if (day===""&& month==="" &&passengerNumber===""){
-                month=messageText
-                sendTextMessage(senderID,"Ok.Please enter the day")
+            else if (day===0&& month===0 &&passengerNumber===0){
+                month=parseInt(messageText)
+                if(month>0 || month <13)
+                    sendTextMessage(senderID,"Ok.Please enter the day")
+                else
+                    sendTextMessage(senderID,"Invalid month.Please enter the month again")
             }
-            else if (day===""&&passengerNumber===""){
-                day=messageText
-                sendTextMessage(senderID,"Ok. Now please enter the number of passengers")
+            else if (day===0&&passengerNumber===0){
+                day=parseInt(messageText)
+                if(day>0 || day<31)
+                    sendTextMessage(senderID,"Ok. Now please enter the number of passengers")
+                else
+                    sendTextMessage(senderID,"Invalid day Now please enter the day again.")
             }
-            else if (passengerNumber==="")
+            else if (passengerNumber===0)
             {
-                passengerNumber=messageText
+                passengerNumber=parseInt(messageText)
                 sendTextMessage(senderID,"Thanks for the inputs. We are searching for flights")
                 //skyscanner işini yap.
                 origin=""
@@ -117,29 +127,22 @@ function receivedMessage(event) {
                 day=""
                 year=""
                 month="0"
-                passengerNumber=""
+                passengerNumber=0
                 firstmessage=0
             }
 
         }
 
-
-        // If we receive a text message, check to see if it matches a keyword
-        // and send back the example. Otherwise, just echo the text we received.
-        /*switch (messageText) {
-            case 'how are you':
-                sendTextMessage(senderID,"fine and you?");
-                break;
-            case 'hi':
-                sendTextMessage(senderID,"Hi there!!");
-                break;
-
-            default:
-                sendTextMessage(senderID, messageText);
-        }*/
     } else if (messageAttachments) {
         sendTextMessage(senderID, "Message with attachment received");
     }
+}
+
+function findFlights(sender)
+{
+    var curl="http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/TR/TRY" //initialy set country and currency.
+    if(day<10)
+
 }
 
 
@@ -179,12 +182,6 @@ function callSendAPI(messageData) {
 }
 
 
-/*http.createServer(function (req, res) {
-    
-    res.writeHead(200, { 'Content-Type': 'text/html' });
-    res.end('Hello, yusuf and serkan bekir and hilal!');
-    
-}).listen(process.env.PORT || 8080);*/
 
 app.listen(app.get('port'), function() {
     console.log('running on port', app.get('port'))
