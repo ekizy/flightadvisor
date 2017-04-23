@@ -75,48 +75,52 @@ function receivedMessage(event) {
             destination=""
             day=""
             year=""
-            month="0"
+            month=""
             passengerNumber=""
             firstmessage=0
             sendTextMessage(senderID,"Inputs are reset.")
         }
-        if(day==="" && month==="" && year ===""&&origin ===""&& destination===""&&passengerNumber===""&&firstmessage===0)
+        else
         {
-            sendTextMessage(senderID,"Hi,Please enter the destination")
-            firstmessage=1
-        }
-        else if (day==="" && month==="" && year ===""&&origin ===""&& destination===""&&passengerNumber===""){
-            destination=messageText
-            sendTextMessage(senderID,"Ok.Please enter the origin")
-        }
-        else if (day==="" && month==="" && year ===""&&origin ===""&&passengerNumber===""){
-            origin=messageText
-            sendTextMessage(senderID,"Ok.Please enter the year")
-        }
-        else if (day==="" && month==="" && year ===""&&passengerNumber===""){
-            year=messageText
-            sendTextMessage(senderID,"Ok.Please enter the month")
-        }
-        else if (day===""&& month==="" &&passengerNumber===""){
-            month=messageText
-            sendTextMessage(senderID,"Ok.Please enter the day")
-        }
-        else if (day===""&&passengerNumber===""){
-            day=messageText
-            sendTextMessage(senderID,"Ok. Now please enther the number of passengers")
-        }
-        else if (passengerNumber==="")
-        {
-            passengerNumber=messageText
-            sendTextMessage(senderID,"Thanks for the inputs. We are searching for flights")
-            //skyscanner işini yap.
-            origin=""
-            destination=""
-            day=""
-            year=""
-            month="0"
-            passengerNumber=""
-            firstmessage=0
+            if(day==="" && month==="" && year ===""&&origin ===""&& destination===""&&passengerNumber===""&&firstmessage===0)
+            {
+                sendTextMessage(senderID,"Hi,Please enter the destination")
+                firstmessage=1
+            }
+            else if (day==="" && month==="" && year ===""&&origin ===""&& destination===""&&passengerNumber===""){
+                destination=messageText
+                sendTextMessage(senderID,"Ok.Please enter the origin")
+            }
+            else if (day==="" && month==="" && year ===""&&origin ===""&&passengerNumber===""){
+                origin=messageText
+                sendTextMessage(senderID,"Ok.Please enter the year")
+            }
+            else if (day==="" && month==="" && year ===""&&passengerNumber===""){
+                year=messageText
+                sendTextMessage(senderID,"Ok.Please enter the month")
+            }
+            else if (day===""&& month==="" &&passengerNumber===""){
+                month=messageText
+                sendTextMessage(senderID,"Ok.Please enter the day")
+            }
+            else if (day===""&&passengerNumber===""){
+                day=messageText
+                sendTextMessage(senderID,"Ok. Now please enter the number of passengers")
+            }
+            else if (passengerNumber==="")
+            {
+                passengerNumber=messageText
+                sendTextMessage(senderID,"Thanks for the inputs. We are searching for flights")
+                //skyscanner işini yap.
+                origin=""
+                destination=""
+                day=""
+                year=""
+                month="0"
+                passengerNumber=""
+                firstmessage=0
+            }
+
         }
 
 
