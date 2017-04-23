@@ -150,6 +150,7 @@ function findFlights()
 }
 
 function getSkyscannerAPI(realURL){
+    console.log("URL bilgisi: " + realURL);
     request(realURL, function (error, response, body) {
         var flight = JSON.parse(body);
         console.log("Ucak bilgileri:"+flight);
