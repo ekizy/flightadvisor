@@ -121,7 +121,7 @@ function receivedMessage(event) {
             {
                 passengerNumber=parseInt(messageText)
                 sendTextMessage(senderID,"Thanks for the inputs. We are searching for flights")
-                //skyscanner işini yap.
+                findFlights();
                 origin=""
                 destination=""
                 day=0
@@ -138,7 +138,7 @@ function receivedMessage(event) {
     }
 }
 
-function findFlights(sender)
+function findFlights()
 {
     var beginingoftheurl="http://partners.api.skyscanner.net/apiservices/browsedates/v1.0/TR/TRY/en-us/" //initialy set country and currency.
     var endoftheUrl="?apiKey="+flightAPI
@@ -146,9 +146,25 @@ function findFlights(sender)
     var realMonth=convertToString(month)
     var realYear=convertToString(year)
     var realURL=beginingoftheurl+origin+"/"+destination+"/"+realYear+"-"+realMonth+"-"+realDay+""+endoftheUrl
-
+    getSkyscannerAPI(realURL);
 }
 
+function getSkyscannerAPI(realURL){
+    request(realURL, function (error, response, body) {
+        var flight = JSON.parse(body);
+        console.log("Ucak bilgileri:"+flight);
+        if (!error && response.statusCode == 200) {
+            var recipientId = body.recipient_id;
+            var messageId = body.message_id;
+
+            console.log("Successfully sent generic message with id %s to recipient %s",
+                messageId, recipientId);
+        } else {
+            console.error("Unable to send message.");
+            console.error(response);
+            console.error(error);
+        }
+    });
 }
 
 function convertToString(temp)
