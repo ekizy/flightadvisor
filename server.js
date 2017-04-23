@@ -64,11 +64,11 @@ function receivedMessage(event) {
         // If we receive a text message, check to see if it matches a keyword
         // and send back the example. Otherwise, just echo the text we received.
         switch (messageText) {
-            case 'generic':
-                sendGenericMessage(senderID);
-                break;
             case 'how are you':
                 sendTextMessage(senderID,"fine and you?");
+                break;
+            case 'hi':
+                sendTextMessage(senderID,"Hi there!!");
                 break;
 
             default:
@@ -79,9 +79,6 @@ function receivedMessage(event) {
     }
 }
 
-function sendGenericMessage(recipientId, messageText) {
-    // To be expanded in later sections
-}
 
 function sendTextMessage(recipientId, messageText) {
     var messageData = {
