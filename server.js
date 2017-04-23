@@ -72,7 +72,7 @@ function receivedMessage(event) {
 
         if(day==="" && month==="" && year ===""&&origin ===""&& destination===""&&passengerNumber==="")
         {
-            sendTextMessage(sender,"Hi,Please enter the destination")
+            sendTextMessage(senderID,"Hi,Please enter the destination")
         }
 
         // If we receive a text message, check to see if it matches a keyword
