@@ -17,7 +17,7 @@ app.use(bodyParser.json())
 
 // index
 app.get('/', function (req, res) {
-    if (req.query['hub.verify_token'] === 'EAAaIdyjALlgBAGP83GpOMB8PCPxqqq1fsXyExWd69K5ug5Yh6muvD5FV8H3Rsam8AvuUETNAUbNXzDpPu9zCo4z4OlIzlXj95qehoR5OF00aT0qHekHk5j6VKahjZC3bvnFf8HRo3KKTPhrsGc8jEI5e0ZCzXLGiMER8T6ngZDZD') {
+    if (req.query['hub.verify_token'] === 'EAAGWpgIySIABACyoZCRqPLKZAJkQEbnZAYGiVEPNry8kasZB6IFOhXP0O6jHQZBMvZCFqgu8VuK3X5QRgVk8ud19XS81ofNRZCn6r9OsJZBt8gac2hqKGbd1TGFZAV9ciTArUNykNrmBznz2ZAZA8WiX3bCFcheIFb4XqpqjZCckND42rAZDZD') {
         res.send(req.query['hub.challenge'])
     } else {
         res.send('Error, wrong token')
