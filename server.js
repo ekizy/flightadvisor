@@ -76,7 +76,7 @@ function receivedMessage(event) {
             destination=""
             day=0
             year=0
-            month="0
+            month=0
             passengerNumber=0
             firstmessage=0
             sendTextMessage(senderID,"Inputs are reset.")
@@ -124,9 +124,9 @@ function receivedMessage(event) {
                 //skyscanner işini yap.
                 origin=""
                 destination=""
-                day=""
-                year=""
-                month="0"
+                day=0
+                year=0
+                month=0
                 passengerNumber=0
                 firstmessage=0
             }
@@ -140,11 +140,26 @@ function receivedMessage(event) {
 
 function findFlights(sender)
 {
-    var curl="http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/TR/TRY" //initialy set country and currency.
-    if(day<10)
+    var beginingoftheurl="http://partners.api.skyscanner.net/apiservices/browsedates/v1.0/TR/TRY/en-us/" //initialy set country and currency.
+    var endoftheUrl="?apiKey="+flightAPI
+    var realDay=convertToString(day)
+    var realMonth=convertToString(month)
+    var realYear=convertToString(year)
+    var realURL=beginingoftheurl+origin+"/"+destination+"/"+realYear+"-"+realMonth+"-"+realDay+""+endoftheUrl
 
 }
 
+}
+
+function convertToString(temp)
+{
+    var str=""
+    if(temp<10)
+        str=str+"0"+temp
+    else
+        str=str+temp
+    return str
+}
 
 function sendTextMessage(recipientId, messageText) {
     var messageData = {
