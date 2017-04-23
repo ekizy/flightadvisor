@@ -21,6 +21,7 @@ var year=""
 var origin=""
 var destination=""
 var passengerNumber=""
+var firstmessage=0;
 
 
 
@@ -70,9 +71,14 @@ function receivedMessage(event) {
 
     if (messageText) {
 
-        if(day==="" && month==="" && year ===""&&origin ===""&& destination===""&&passengerNumber==="")
+        if(day==="" && month==="" && year ===""&&origin ===""&& destination===""&&passengerNumber===""&&firstmessage===0)
         {
             sendTextMessage(senderID,"Hi,Please enter the destination")
+            firstmessage=1
+        }
+        else if (day==="" && month==="" && year ===""&&origin ===""&& destination===""&&passengerNumber===""){
+            destination=messageText
+            sendTextMessage(senderID,destination)
         }
 
         // If we receive a text message, check to see if it matches a keyword
