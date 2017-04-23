@@ -20,7 +20,7 @@ app.get('/', function (req, res) {
     if (req.query['hub.verify_token'] === 'EAAGWpgIySIABACyoZCRqPLKZAJkQEbnZAYGiVEPNry8kasZB6IFOhXP0O6jHQZBMvZCFqgu8VuK3X5QRgVk8ud19XS81ofNRZCn6r9OsJZBt8gac2hqKGbd1TGFZAV9ciTArUNykNrmBznz2ZAZA8WiX3bCFcheIFb4XqpqjZCckND42rAZDZD') {
         res.send(req.query['hub.challenge'])
     } else {
-        res.send('Error, wrong token')
+        res.send('Error, wrong token!!!')
     }
 })
 
