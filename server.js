@@ -16,9 +16,6 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
 // index
-app.get('/', function (req, res) {
-    res.send('1169644883')
-})
 
 app.get('/webhook/', function (req, res) {
     if (req.query['hub.verify_token'] === 'EAAaIdyjALlgBAGP83GpOMB8PCPxqqq1fsXyExWd69K5ug5Yh6muvD5FV8H3Rsam8AvuUETNAUbNXzDpPu9zCo4z4OlIzlXj95qehoR5OF00aT0qHekHk5j6VKahjZC3bvnFf8HRo3KKTPhrsGc8jEI5e0ZCzXLGiMER8T6ngZDZD') {
