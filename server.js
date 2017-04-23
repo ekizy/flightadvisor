@@ -15,6 +15,15 @@ app.use(bodyParser.urlencoded({extended: false}))
 // parse application/json
 app.use(bodyParser.json())
 
+var day=""
+var month=""
+var year=""
+var origin=""
+var destination=""
+var passengerNumber=""
+
+
+
 app.get('/', function (req, res) {
     if (req.query['hub.verify_token'] === 'EAAGWpgIySIABACyoZCRqPLKZAJkQEbnZAYGiVEPNry8kasZB6IFOhXP0O6jHQZBMvZCFqgu8VuK3X5QRgVk8ud19XS81ofNRZCn6r9OsJZBt8gac2hqKGbd1TGFZAV9ciTArUNykNrmBznz2ZAZA8WiX3bCFcheIFb4XqpqjZCckND42rAZDZD') {
         res.send(req.query['hub.challenge'])
@@ -61,9 +70,14 @@ function receivedMessage(event) {
 
     if (messageText) {
 
+        if(day==="" && month==="" && year ===""&&origin ===""&& destination===""&&passengerNumber==="")
+        {
+            sendTextMessage(sender,"Hi,Please enter the destination")
+        }
+
         // If we receive a text message, check to see if it matches a keyword
         // and send back the example. Otherwise, just echo the text we received.
-        switch (messageText) {
+        /*switch (messageText) {
             case 'how are you':
                 sendTextMessage(senderID,"fine and you?");
                 break;
@@ -73,7 +87,7 @@ function receivedMessage(event) {
 
             default:
                 sendTextMessage(senderID, messageText);
-        }
+        }*/
     } else if (messageAttachments) {
         sendTextMessage(senderID, "Message with attachment received");
     }
