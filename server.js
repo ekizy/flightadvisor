@@ -15,7 +15,6 @@ app.use(bodyParser.urlencoded({extended: false}))
 // parse application/json
 app.use(bodyParser.json())
 
-// index
 app.get('/', function (req, res) {
     if (req.query['hub.verify_token'] === 'EAAGWpgIySIABACyoZCRqPLKZAJkQEbnZAYGiVEPNry8kasZB6IFOhXP0O6jHQZBMvZCFqgu8VuK3X5QRgVk8ud19XS81ofNRZCn6r9OsJZBt8gac2hqKGbd1TGFZAV9ciTArUNykNrmBznz2ZAZA8WiX3bCFcheIFb4XqpqjZCckND42rAZDZD') {
         res.send(req.query['hub.challenge'])
@@ -23,6 +22,31 @@ app.get('/', function (req, res) {
         res.send('Error, wrong token!!!')
     }
 })
+
+app.post('/', function (req, res) {
+    var data = req.body;
+    
+    if (data.object === 'page') {
+        data.entry.forEach(function(entry) {
+            var pageID = entry.id;
+            var timeOfEvent = entry.time;
+
+            // Iterate over each messaging event
+            entry.messaging.forEach(function(event) {
+                if (event.message) {
+                    receivedMessage(event);
+                } else {
+                    console.log("Webhook received unknown event: ", event);
+                }
+            });
+        });
+        res.sendStatus(200);
+    }
+});
+
+function receivedMessage(event) {
+    console.log("Message data: ", event.message);
+}
 
 
 /*http.createServer(function (req, res) {
