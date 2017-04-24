@@ -180,8 +180,13 @@ function receivedMessage(event) {
                         else{
                             directMessage = "(Transfer Flight)"
                         }
-                        sendTextMessage(senderID, "Cheapest flight from "+ result.Places[originIndex].Name + " to " + result.Places[destinationIndex].Name
-                            + " with "+ result.Carriers[0].Name+ directMessage + " " + result.Quotes[0].MinPrice + " " + result.Currencies[0].Symbol)
+                        if(result.Quotes[0]) {
+                            sendTextMessage(senderID, "Cheapest flight from " + result.Places[originIndex].Name + " to " + result.Places[destinationIndex].Name
+                                + " with " + result.Carriers[0].Name + directMessage + " " + result.Quotes[0].MinPrice + " " + result.Currencies[0].Symbol)
+                        }
+                        else{
+                            sendTextMessage(senderID, "We couldn't find any flight please type the #reset keyword for start again.")
+                        }
                     }
                     origin=""
                     destination=""
