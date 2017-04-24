@@ -160,7 +160,7 @@ function receivedMessage(event) {
                         if(result.Quotes[0]) {
                             var originIndex = 0
                             var destinationIndex = 0
-                            var originID = result.Quotes[0].OriginId
+                            var originID = result.Quotes[0].OutboundLeg.OriginId
                             for(var i=0;i<result.Places.length; i++){
                                 if(result.Places[i].PlaceId===originID){
                                     originIndex = i
