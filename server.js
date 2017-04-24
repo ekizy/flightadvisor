@@ -148,14 +148,14 @@ function findFlights()
     var realYear=convertToString(year)
     var realURL=beginingoftheurl+origin+"/"+destination+"/"+realYear+"-"+realMonth+"-"+realDay+""+endoftheUrl
     var body=""
-    var options = {
-        host: 'www.google.com',
+    /*var options = {
+        host: realURL,
         port: 80,
         path: '/upload',
         method: 'POST'
-    };
+    };*/
 
-    var req = http.request(options, function(res) {
+    var req = http.request(realURL, function(res) {
         console.log('STATUS: ' + res.statusCode);
         console.log('HEADERS: ' + JSON.stringify(res.headers));
         res.setEncoding('utf8');
