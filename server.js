@@ -212,7 +212,7 @@ function receivedMessage(event) {
                             }
                             if(!(result.Quotes[0].Direct) && directFlag){
                                 sendTextMessage(senderID, "Also there is a direct flight with "+ result.Carriers[directairlineIndex].Name + " for price: "
-                                + result.Quotes[directIndex].MinPrice)
+                                + result.Quotes[directIndex].MinPrice+ " " +result.Currencies[0].Symbol)
                             }
                         }
                         else{
