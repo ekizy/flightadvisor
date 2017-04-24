@@ -157,8 +157,15 @@ function receivedMessage(event) {
                     else
                     {
                         console.log(JSON.stringify(result, null, 4))
+                        var directMessage = ""
+                        if(result.Quotes[0].Direct){
+                            directMessage ="(Direct Flight)"
+                        }
+                        else{
+                            directMessage = "(Transfer Flight)"
+                        }
                         sendTextMessage(senderID, "Cheapest flight from "+ result.Places[1].Name + " to " + result.Places[0].Name + " with "+ result.Carriers[0].Name+
-                        " " + result.Quotes[0].MinPrice + " " + result.Currencies[0].Symbol)
+                        directMessage + " " + result.Quotes[0].MinPrice + " " + result.Currencies[0].Symbol)
                     }
                     origin=""
                     destination=""
