@@ -27,7 +27,7 @@ var flightAPI="co489413118494692021956798574785"
 
 function getFlights(options, callback) {
     SuperAgent
-    .get(`http://partners.api.skyscanner.net/apiservices/browseroutes/v1.0/TR/TRY/en-us/${options.originPlace}/${options.destinationPlace}/${options.outboundPartialDate}/${options.inboundPartialDate}?apiKey=`+flightAPI)
+    .get(`http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/TR/TRY/en-us/${options.originPlace}/${options.destinationPlace}/${options.outboundPartialDate}/${options.inboundPartialDate}?apiKey=`+flightAPI)
     .end((err, res) => {
         callback(res.body);
     });
