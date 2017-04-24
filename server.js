@@ -160,6 +160,13 @@ function receivedMessage(event) {
                         sendTextMessage(senderID, result.Places[1].Name + " to " + result.Places[0].Name + " with "+ result.Carriers[0].Name+
                         " " + result.Quotes[0].MinPrice + " " + result.Currencies[0].Symbol)
                     }
+                    origin=""
+                    destination=""
+                    day=0
+                    year=0
+                    month=0
+                    passengerNumber=0
+                    firstmessage=0
 
                 })
             }
