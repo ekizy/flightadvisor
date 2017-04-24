@@ -151,11 +151,11 @@ function receivedMessage(event) {
                 }, function (result) {
                     if(result.ValidationErrors)
                     {
-                        Console.log("Invalid inputs")
+                        console.log("Invalid inputs")
                     }
                     else
                     {
-                        Console.log(result.toString())
+                        console.log(result.toString())
                     }
 
                 })
