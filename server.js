@@ -140,6 +140,7 @@ function receivedMessage(event) {
 
 function findFlights()
 {
+    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
     var beginingoftheurl="http://partners.api.skyscanner.net/apiservices/browsedates/v1.0/TR/TRY/en-us/" //initialy set country and currency.
     var endoftheUrl="?apiKey="+flightAPI
     var realDay=convertToString(day)
