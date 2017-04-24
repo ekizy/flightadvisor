@@ -152,10 +152,13 @@ function receivedMessage(event) {
                     if(result.ValidationErrors)
                     {
                         console.log("Invalid inputs")
+                        sendTextMessage(senderID, "Invalid inputs, we couldn't find the flights.")
                     }
                     else
                     {
                         console.log(JSON.stringify(result, null, 4))
+                        sendTextMessage(senderID, result.Places[1].Name + " to " + result.Places[0].Name + " with "+ result.Carriers[0].Name
+                        " " + result.Quotes[0].MinPrice + " " + result.Curencies[0].Symbol)
                     }
 
                 })
