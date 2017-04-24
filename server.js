@@ -200,7 +200,7 @@ function receivedMessage(event) {
                                 if(result.Quotes[k].Direct){
                                     directIndex = k
                                     directFlag = true
-                                    airlineCode = result.Quotes[k].OutboundLeg.CarrierId[0]
+                                    airlineCode = result.Quotes[k].OutboundLeg.CarrierIds[0]
                                     break
                                 }
                             }
@@ -211,7 +211,7 @@ function receivedMessage(event) {
                                 }
                             }
                             if(!(result.Quotes[0].Direct) && directFlag){
-                                sendTextMessage(senderID, "Also there is a direct flight with "+ result.Carriers[directairlineIndex] + " for price: "
+                                sendTextMessage(senderID, "Also there is a direct flight with "+ result.Carriers[directairlineIndex].Name + " for price: "
                                 + result.Quotes[directIndex].MinPrice)
                             }
                         }
