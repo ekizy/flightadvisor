@@ -159,9 +159,6 @@ function receivedMessage(event) {
                         console.log(JSON.stringify(result, null, 4))
                         sendTextMessage(senderID, result.Places[1].Name + " to " + result.Places[0].Name + " with "+ result.Carriers[0].Name+
                         " " + result.Quotes[0].MinPrice + " " + result.Currencies[0].Symbol)
-                        if(result.Quotes[0].Direct){
-                            sendTextMessage(senderID, "Direct Flight")
-                        }
                     }
                     origin=""
                     destination=""
