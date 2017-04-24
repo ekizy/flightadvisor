@@ -100,22 +100,31 @@ function receivedMessage(event) {
                 year=parseInt(messageText)
                 if(year>=2017 )
                     sendTextMessage(senderID,"Ok.Please enter the month")
-                else
+                else{
                     sendTextMessage(senderID,"Invalid year.Please enter year again")
+                    year=0
+                }
+
             }
             else if (day===0&& month===0 &&passengerNumber===0){
                 month=parseInt(messageText)
                 if(month>0 || month <13)
                     sendTextMessage(senderID,"Ok.Please enter the day")
                 else
+                {
                     sendTextMessage(senderID,"Invalid month.Please enter the month again")
+                    month=0
+                }
             }
             else if (day===0&&passengerNumber===0){
                 day=parseInt(messageText)
                 if(day>0 || day<31)
                     sendTextMessage(senderID,"Ok. Now please enter the number of passengers")
                 else
+                {
                     sendTextMessage(senderID,"Invalid day Now please enter the day again.")
+                    day=0
+                }
             }
             else if (passengerNumber===0)
             {
