@@ -164,7 +164,7 @@ function findFlights()
         method: 'POST'
     };*/
 
-    var req = http.request(realURL, function(res) {
+    var req = http.get(realURL, function(res) {
         console.log('STATUS: ' + res.statusCode);
         console.log('HEADERS: ' + JSON.stringify(res.headers));
         res.setEncoding('utf8');
