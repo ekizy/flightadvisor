@@ -121,7 +121,7 @@ function receivedMessage(event) {
             {
                 passengerNumber=parseInt(messageText)
                 sendTextMessage(senderID,"Thanks for the inputs. We are searching for flights")
-                //skyscanner işini yap.
+                findFlights()
                 origin=""
                 destination=""
                 day=0
@@ -138,7 +138,7 @@ function receivedMessage(event) {
     }
 }
 
-function findFlights(sender)
+function findFlights()
 {
     var beginingoftheurl="http://partners.api.skyscanner.net/apiservices/browsedates/v1.0/TR/TRY/en-us/" //initialy set country and currency.
     var endoftheUrl="?apiKey="+flightAPI
@@ -146,6 +146,33 @@ function findFlights(sender)
     var realMonth=convertToString(month)
     var realYear=convertToString(year)
     var realURL=beginingoftheurl+origin+"/"+destination+"/"+realYear+"-"+realMonth+"-"+realDay+""+endoftheUrl
+    var body=""
+    var options = {
+        host: 'www.google.com',
+        port: 80,
+        path: '/upload',
+        method: 'POST'
+    };
+
+    var req = http.request(options, function(res) {
+        console.log('STATUS: ' + res.statusCode);
+        console.log('HEADERS: ' + JSON.stringify(res.headers));
+        res.setEncoding('utf8');
+        res.on('data', function (chunk) {
+            console.log('BODY: ' + chunk);
+            body+=chunk
+        });
+    });
+
+    req.on('error', function(e) {
+        console.log('problem with request: ' + e.message);
+    });
+
+// write data to request body
+    req.write('data\n');
+    req.write('data\n');
+    req.end();
+    console.log(body);
 
 }
 
