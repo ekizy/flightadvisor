@@ -155,7 +155,7 @@ function receivedMessage(event) {
                     }
                     else
                     {
-                        console.log(result.toString())
+                        console.log(JSON.stringify(result, null, 4))
                     }
 
                 })
