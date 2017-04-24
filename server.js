@@ -2,18 +2,19 @@
 //var http = require('http');
 
 
-const express = require('express')
-const bodyParser = require('body-parser')
-const request = require('request')
-const app = express()
+const express = require('express');
+const bodyParser = require('body-parser');
+const request = require('request');
+const app = express();
+const SuperAgent = require('superagent');
 
-app.set('port', (process.env.PORT || 5000))
+app.set('port', (process.env.PORT || 5000));
 
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.urlencoded({extended: false}));
 
 // parse application/json
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 var day=0
 var month=0
@@ -24,6 +25,13 @@ var passengerNumber=0
 var firstmessage=0
 var flightAPI="co489413118494692021956798574785"
 
+function getFlights(options, callback) {
+    SuperAgent
+    .get(`http://partners.api.skyscanner.net/apiservices/browseroutes/v1.0/TR/TRY/en-us/${options.originPlace}/${options.destinationPlace}/${options.outboundPartialDate}/${options.inboundPartialDate}?apiKey=`+flightAPI)
+    .end((err, res) => {
+        callback(res.body);
+    });
+}
 
 
 app.get('/', function (req, res) {
@@ -128,16 +136,29 @@ function receivedMessage(event) {
             }
             else if (passengerNumber===0)
             {
+                var realDay=convertToString(day)
+                var realMonth=convertToString(month)
+                var realYear=convertToString(year)
+
                 passengerNumber=parseInt(messageText)
                 sendTextMessage(senderID,"Thanks for the inputs. We are searching for flights")
-                findFlights()
-                origin=""
-                destination=""
-                day=0
-                year=0
-                month=0
-                passengerNumber=0
-                firstmessage=0
+                getFlights({
+                    originPlace: origin,
+                    destinationPlace:destination,
+                    outboundPartialDate:realYear+"-"+realMonth+"-"+realDay,
+                    inboundPartialDate:""
+
+                }, function (result) {
+                    if(result.ValidationErrors)
+                    {
+                        Console.log("Invalid inputs")
+                    }
+                    else
+                    {
+                        Console.log(result.toString())
+                    }
+
+                })
             }
 
         }
@@ -147,45 +168,7 @@ function receivedMessage(event) {
     }
 }
 
-function findFlights()
-{
-    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
-    var beginingoftheurl="http://partners.api.skyscanner.net/apiservices/browsedates/v1.0/TR/TRY/en-us/" //initialy set country and currency.
-    var endoftheUrl="?apiKey="+flightAPI
-    var realDay=convertToString(day)
-    var realMonth=convertToString(month)
-    var realYear=convertToString(year)
-    var realURL=beginingoftheurl+origin+"/"+destination+"/"+realYear+"-"+realMonth+"-"+realDay+""+endoftheUrl
-    var body=""
-    /*var options = {
-        host: realURL,
-        port: 80,
-        path: '/upload',
-        method: 'POST'
-    };*/
 
-    var http=require('http')
-    var req = http.get(realURL, function(res) {
-        console.log('STATUS: ' + res.statusCode);
-        console.log('HEADERS: ' + JSON.stringify(res.headers));
-        res.setEncoding('utf8');
-        res.on('data', function (chunk) {
-            console.log('BODY: ' + chunk);
-            body+=chunk
-        });
-    });
-
-    req.on('error', function(e) {
-        console.log('problem with request: ' + e.message);
-    });
-
-// write data to request body
-    req.write('data\n');
-    req.write('data\n');
-    req.end();
-    console.log(body);
-
-}
 
 function convertToString(temp)
 {
