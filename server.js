@@ -157,6 +157,22 @@ function receivedMessage(event) {
                     else
                     {
                         console.log(JSON.stringify(result, null, 4))
+                        var originIndex = 0
+                        var destinationIndex = 0
+                        var originID = result.Quotes[0].OriginId
+                        for(var i=0;i<result.Places.length; i++){
+                            if(result.Places[i].PlaceId===originID){
+                                originIndex = i
+                                break
+                            }
+                        }
+                        if(originIndex===1){
+                            destinationIndex=0
+                        }
+                        else
+                        {
+                            destinationIndex=1
+                        }
                         var directMessage = ""
                         if(result.Quotes[0].Direct){
                             directMessage ="(Direct Flight)"
@@ -164,7 +180,7 @@ function receivedMessage(event) {
                         else{
                             directMessage = "(Transfer Flight)"
                         }
-                        sendTextMessage(senderID, "Cheapest flight from "+ result.Places[1].Name + " to " + result.Places[0].Name + " with "+ result.Carriers[0].Name+
+                        sendTextMessage(senderID, "Cheapest flight from "+ result.Places[originIndex].Name + " to " + result.Places[destinationIndex].Name + " with "+ result.Carriers[0].Name+
                         directMessage + " " + result.Quotes[0].MinPrice + " " + result.Currencies[0].Symbol)
                     }
                     origin=""
