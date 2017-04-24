@@ -192,6 +192,28 @@ function receivedMessage(event) {
                             var price = parseInt(result.Quotes[0].MinPrice, 10)
                             sendTextMessage(senderID, "Cheapest flight from " + result.Places[originIndex].Name + " to " + result.Places[destinationIndex].Name
                                 +" for "+passengerNumber+ " passenger" + " with " + result.Carriers[airlineIndex].Name + directMessage + " " + convertToString(passengerNumber*price) + " " + result.Currencies[0].Symbol)
+                            var directFlag = false
+                            var directIndex = 0
+                            var directairlineIndex = 0
+                            var airlineCode = 0
+                            for(var k=0; k<result.Quotes.length; k++){
+                                if(result.Quotes[k].Direct){
+                                    directIndex = k
+                                    directFlag = true
+                                    airlineCode = result.Quotes[k].OutboundLeg.CarrierId[0]
+                                    break
+                                }
+                            }
+                            for(var a=0; a<result.Carriers.length; a++){
+                                if(result.Carriers[a].CarrierId===airlineCode){
+                                    directairlineIndex = a
+                                    break
+                                }
+                            }
+                            if(!(result.Quotes[0].Direct) && directFlag){
+                                sendTextMessage(senderID, "Also there is a direct flight with "+ result.Carriers[directairlineIndex] + " for price: "
+                                + result.Quotes[directIndex].MinPrice)
+                            }
                         }
                         else{
                             sendTextMessage(senderID, "We couldn't find any flight please type the #reset keyword for start again.")
