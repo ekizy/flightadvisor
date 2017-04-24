@@ -180,7 +180,7 @@ function receivedMessage(event) {
                         else{
                             directMessage = "(Transfer Flight)"
                         }
-                        sendTextMessage(senderID, "Cheapest flight from "+ result.Places[originIndex].Name + " to " + result.Places[destinationIndex].Name +" at "+result.Quotes[0].DepartureDate
+                        sendTextMessage(senderID, "Cheapest flight from "+ result.Places[originIndex].Name + " to " + result.Places[destinationIndex].Name +" at "+result.Quotes[0].OutboundLeg.DepartureDate
                             + " with "+ result.Carriers[0].Name+ directMessage + " " + result.Quotes[0].MinPrice + " " + result.Currencies[0].Symbol)
                     }
                     origin=""
