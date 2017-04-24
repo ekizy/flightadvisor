@@ -164,7 +164,7 @@ function receivedMessage(event) {
                             for(var i=0;i<result.Places.length; i++){
                                 if(result.Places[i].PlaceId===originID){
                                     originIndex = i
-                                 break
+                                    break
                                 }
                             }
                             if(originIndex===1){
@@ -173,6 +173,14 @@ function receivedMessage(event) {
                             else
                             {
                                 destinationIndex=1
+                            }
+                            var airlineIndex = 0
+                            var airlineID = result.Quotes[0].OutboundLeg.CarrierIds[0]
+                            for (var j=0; j<result.Carriers.length; j++){
+                                if(result.Carriers[j].CarrierId ===airlineID){
+                                    airlineIndex = j
+                                    break
+                                }
                             }
                             var directMessage = ""
                             if(result.Quotes[0].Direct){
@@ -183,7 +191,7 @@ function receivedMessage(event) {
                             }
                             var price = parseInt(result.Quotes[0].MinPrice, 10)
                             sendTextMessage(senderID, "Cheapest flight from " + result.Places[originIndex].Name + " to " + result.Places[destinationIndex].Name
-                                +" for "+passengerNumber+ " passenger " + " with " + result.Carriers[0].Name + directMessage + " " + convertToString(passengerNumber*price) + " " + result.Currencies[0].Symbol)
+                                +" for "+passengerNumber+ " passenger" + " with " + result.Carriers[airlineIndex].Name + directMessage + " " + convertToString(passengerNumber*price) + " " + result.Currencies[0].Symbol)
                         }
                         else{
                             sendTextMessage(senderID, "We couldn't find any flight please type the #reset keyword for start again.")
